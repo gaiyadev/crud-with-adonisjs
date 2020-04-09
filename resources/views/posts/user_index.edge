@@ -21,7 +21,8 @@
         <td>{{ post.id}}</td>
         <td>{{ post.title}}</td>
         <td> {{ post.body }} </td>
-        <td> <a class="btn btn-info" href="/posts/edit/{{ post.id }}">Edit</a>
+        <td> <a class="btn btn-info" href="/posts/edit/{{ post.id }}, query: { foo: 'bar' }
+">Edit</a>
         <form action=" {{ '/posts/' + post.id + '?_method=DELETE'}}" method="POST"> 
           {{ csrfField() }}
           <button class="btn btn-danger" type="submit">Delete</button></form>  </td>

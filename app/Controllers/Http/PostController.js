@@ -67,7 +67,7 @@ class PostController {
     async edit({ params, view }) {
         const post = await Post.find(params.id);
         return view.render('posts.edit', {
-            post: post
+            post: post,
         })
 
     }
