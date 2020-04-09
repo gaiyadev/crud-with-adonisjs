@@ -54,12 +54,45 @@ class PostController {
 
 
     async userIndex({ view, auth }) {
-        const posts = Database.table('posts').select('*').where('user_id', '=', auth.user.id);
+        const posts = await Database.table('posts').select('*').where('user_id', '=', auth.user.id);
         return view.render('posts.user_index', {
-            posts: posts.toJSON()
+            title: 'veiw posts',
+            posts: posts
+        })
+
+
+    }
+    //edit
+
+    async edit({ params, view }) {
+        const post = await Post.find(params.id);
+        return view.render('posts.edit', {
+            post: post
         })
 
     }
+
+    //updating
+    async update({ request, response, session, params }) {
+        const rules = {
+            title: 'required',
+            body: 'required',
+        }
+        const validation = await validate(request.all(), rules)
+
+        if (validation.fails()) {
+            session.withErrors(validation.messages()).flashExcept(['password'])
+            return response.redirect('back');
+        }
+
+        const post = await Post.find(params.id);
+        post.title = request.input('title');
+        post.body = request.input('body');
+        await post.save()
+        session.flash({ notification: 'Post updated succesfully' });
+        return response.redirect('/user_post');
+    }
+
 
 
 }

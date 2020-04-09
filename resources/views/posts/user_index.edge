@@ -1,1 +1,34 @@
-bgddhdfhgdfhdgt
+@layout('include.main')
+
+@section('content')
+<table class="table table-striped">
+    @if(old('notification'))
+    <div class="alert alert-success">
+        {{ old('notification') }}
+    </div>
+@endif
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Post</th>
+     <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        @each(post in posts)
+        <tr>
+        <td>{{ post.id}}</td>
+        <td>{{ post.title}}</td>
+        <td> {{ post.body }} </td>
+        <td> <a class="btn btn-info" href="/posts/edit/{{ post.id }}">Edit</a>  <form> <button class="btn btn-danger" type="submit">Delete</button></form>  </td>
+      </tr>
+     
+        @else
+          <p class="text-danger text-center"> nO post found</p>
+        @endeach
+      
+     
+    </tbody>
+  </table>
+@endsection

@@ -24,10 +24,13 @@ Route.get('/create', 'PostController.create').as('users.create')
 Route.get('/register', 'PostController.register').as('users.register')
 Route.get('/login', 'PostController.login').as('users.login')
 Route.get('/user_post', 'PostController.userIndex').as('user.post')
+Route.get('/posts/edit/:id', 'PostController.edit');
 //posting
 Route.post('/register', 'UserController.creatUser').as('users.register')
 Route.post('/login', 'UserController.login').as('users.login')
 Route.post('/create', 'PostController.store').as('user.create')
+Route.put('/posts/:id', 'PostController.update');
+
 
 
 Route.get('/logout', async ({ auth, response }) => {
