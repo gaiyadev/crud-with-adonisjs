@@ -1,4 +1,7 @@
 'use strict'
+const { validate } = use('Validator')
+const Post = use('App/Models/Post')
+const User = use('App/Models/User')
 
 class PostController {
 
@@ -7,7 +10,7 @@ class PostController {
             title: 'Adonis Blog'
         })
     }
-    //creating a new post
+    //creating a new post 
     async create({ view }) {
         return view.render('posts.create_post', {
             title: 'Create Blog'
@@ -28,6 +31,30 @@ class PostController {
         return view.render('posts.register', {
             title: 'Register User'
         })
+    }
+
+    //posting
+    async store({ request, response, session }) {
+        const rules = {
+            email: 'required|email|unique:users,email',
+            password: 'required',
+            Rpassword: 'required|same:password'
+        }
+        const validation = await validate(request.all(), rules)
+
+        if (validation.fails()) {
+            session
+                .withErrors(validation.messages())
+                .flashExcept(['password'])
+            return response.redirect('back')
+        }
+
+        const Post = new Post()
+        post.title = request.input('email')
+        post.body = request.input('password')
+        await post.save()
+        session.flash({ notification: 'Post added succesfully' })
+        return response.redirect('/create')
     }
 }
 

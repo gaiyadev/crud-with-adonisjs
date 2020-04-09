@@ -23,4 +23,14 @@ Route.get('/create', 'PostController.create').as('users.create')
 Route.get('/view', 'PostController.view').as('users.view')
 Route.get('/register', 'PostController.register').as('users.register')
 Route.get('/login', 'PostController.login').as('users.login')
+//posting
+Route.post('/register', 'UserController.creatUser').as('users.register')
+Route.post('/login', 'UserController.login').as('users.login')
+
+
+Route.get('/logout', async ({ auth, response }) => {
+    await auth.logout();
+    return response.redirect('/login');
+
+})
 
