@@ -1,0 +1,28 @@
+@layout('include.main')
+
+@section('content')
+    <h1>Create a Post</h1>
+    <div class="row">
+        <div class="col-md-12">
+<form action="" method="POST">
+    {{ csrfField() }}
+  <div class="form-group">
+    <label for="email">Email </label>
+    <input type="text" class="form-control" id="email" name="email" >
+  </div>
+
+   <div class="form-group">
+    <label for="password">Password </label>
+    <input type="password" class="form-control" id="password" name="password" >
+  </div>
+   <div class="form-group">
+    <label for="Rpassword">Retype Password </label>
+    <input type="password" class="form-control" id="Rpassword" name="Rpassword" >
+  </div>
+  
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        </div>
+    </div>
+@endsection
