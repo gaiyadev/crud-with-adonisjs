@@ -92,8 +92,14 @@ class PostController {
         session.flash({ notification: 'Post updated succesfully' });
         return response.redirect('/user_post');
     }
+    //DE3LETEING POST
+    async destroy({ params, session, response, }) {
+        const post = await Post.find(params.id);
+        await post.delete();
+        session.flash({ notification: 'Post deleted succesfully' });
+        return response.redirect('/user_post');
 
-
+    }
 
 }
 

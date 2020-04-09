@@ -30,6 +30,7 @@ Route.post('/register', 'UserController.creatUser').as('users.register')
 Route.post('/login', 'UserController.login').as('users.login')
 Route.post('/create', 'PostController.store').as('user.create')
 Route.put('/posts/:id', 'PostController.update');
+Route.delete('/posts/:id', 'PostController.destroy');
 
 
 
