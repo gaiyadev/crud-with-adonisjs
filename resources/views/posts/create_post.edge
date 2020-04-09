@@ -9,7 +9,7 @@
         {{ old('notification') }}
     </div>
 @endif
-<form action="" method="POST">
+<form action=" {{ route('user.create')}} " method="POST">
     {{ csrfField() }}
   <div class="form-group">
     <label for="title">Title </label>

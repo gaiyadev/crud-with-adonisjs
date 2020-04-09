@@ -1,4 +1,6 @@
 'use strict'
+
+const Database = use('Database')
 const { validate } = use('Validator')
 const Post = use('App/Models/Post')
 const User = use('App/Models/User')
@@ -17,11 +19,6 @@ class PostController {
         })
     }
 
-    async view({ view }) {
-        return view.render('posts.view_post', {
-            title: 'View Post'
-        })
-    }
     async login({ view }) {
         return view.render('posts.login', {
             title: 'Login User'
@@ -34,28 +31,37 @@ class PostController {
     }
 
     //posting
-    async store({ request, response, session }) {
+    async store({ request, response, session, auth }) {
         const rules = {
-            email: 'required|email|unique:users,email',
-            password: 'required',
-            Rpassword: 'required|same:password'
+            title: 'required',
+            body: 'required',
         }
         const validation = await validate(request.all(), rules)
 
         if (validation.fails()) {
-            session
-                .withErrors(validation.messages())
-                .flashExcept(['password'])
-            return response.redirect('back')
+            session.withErrors(validation.messages()).flashExcept(['password'])
+            return response.redirect('back');
         }
 
-        const Post = new Post()
-        post.title = request.input('email')
-        post.body = request.input('password')
+        const post = new Post()
+        post.title = request.input('title');
+        post.body = request.input('body');
+        post.user_id = auth.user.id;
         await post.save()
-        session.flash({ notification: 'Post added succesfully' })
-        return response.redirect('/create')
+        session.flash({ notification: 'Post added succesfully' });
+        return response.redirect('/create');
     }
+
+
+    async userIndex({ view, auth }) {
+        const posts = Database.table('posts').select('*').where('user_id', '=', auth.user.id);
+        return view.render('posts.user_index', {
+            posts: posts.toJSON()
+        })
+
+    }
+
+
 }
 
 module.exports = PostController

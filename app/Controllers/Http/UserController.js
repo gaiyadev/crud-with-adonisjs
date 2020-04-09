@@ -3,6 +3,7 @@ const { validate } = use('Validator')
 const User = use('App/Models/User')
 
 
+
 class UserController {
     //posting
     async creatUser({ request, response, session, auth }) {
@@ -20,7 +21,7 @@ class UserController {
             return response.redirect('back')
         }
         const user = await User.create(request.only(['email', 'password']));
-        await auth.login(user);
+        await auth.remember(true).login(user);
         session.flash({ notification: 'Account added succesfully' })
         return response.redirect('/create');
 
@@ -44,7 +45,7 @@ class UserController {
         // const password = request.input('password')
         const { email, password } = request.all();
         try {
-            await auth.attempt(email, password);
+            await auth.remember(true).attempt(email, password);
             return response.redirect('/create');
         } catch (error) {
             session.flash({ notification: 'Invalid username or password' })
