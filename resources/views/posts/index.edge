@@ -1,6 +1,29 @@
-@layout('include.main')
-
-@section('content')
-
-    <h1 class="text-success">index me</h1>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello Adonis</title>
+  {{ style('style') }}
+  
+</head>
+<body>
+  <section>
+    <div class="logo"></div>
+    <div class="title"></div>
+    <div class="subtitle">
+      <p>AdonisJs simplicity will make you feel confident about your code</p>
+      <p>
+        Don't know where to start? Read the <a href="https://adonisjs.com/docs">documentation</a>.
+        <a class="btn btn-primary" href=" {{route('users.login')}} ">Login</a>
+      </p>
+    </div>
+  </section>
+  <style>
+      .btn-primary {
+          background-color: red;
+          width: 200px;
+          padding: 12px 10px;
+      }
+  </style>
+</body>
+</html>

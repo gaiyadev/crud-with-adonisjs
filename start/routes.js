@@ -18,13 +18,15 @@ const Route = use('Route')
 
 //Route.on('/').render('home')
 
+
+
 Route.get('/', 'PostController.index')
 Route.get('/create', 'PostController.create').as('users.create')
 //Route.get('/view', 'PostController.view').as('users.view')
 Route.get('/register', 'PostController.register').as('users.register')
 Route.get('/login', 'PostController.login').as('users.login')
 Route.get('/user_post', 'PostController.userIndex').as('user.post')
-Route.get('/posts/edit/:id', 'PostController.edit');
+Route.get('/posts/edit/:id', 'PostController.edit')
 //posting
 Route.post('/register', 'UserController.creatUser').as('users.register')
 Route.post('/login', 'UserController.login').as('users.login')

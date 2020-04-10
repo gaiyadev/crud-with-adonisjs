@@ -12,6 +12,7 @@ class PostController {
             title: 'Adonis Blog'
         })
     }
+
     //creating a new post 
     async create({ view }) {
         return view.render('posts.create_post', {
