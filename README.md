@@ -1,6 +1,7 @@
 # Adonis fullstack application
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+This is the fullstack boilerplate for AdonisJs, it comes pre-configured with. 
+Users auth and ACl included
 
 1. Bodyparser
 2. Session
